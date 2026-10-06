@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>It's Saturday — Aibo Banner 2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400&display=swap" rel="stylesheet">
+  <!-- 英文字體：Adobe Fonts「collier」 -->
+  <link rel="stylesheet" href="https://use.typekit.net/ezg8jxr.css">
+  <style>
+    :root {
+      /* ══════════ 顏色設定 ══════════ */
+      --bg: #b3a08f;               /* 圖片載入前的底色 */
+      --text: #ffffff;             /* 文字顏色 */
+
+      /* ══════════ 字型設定（英文 collier、中日文思源黑體） ══════════ */
+      --font: "collier", 'Noto Sans TC', sans-serif;
+
+      /* ══════════ 電腦／平板文字 ══════════ */
+      --title-size: clamp(22px, 1.9vw, 34px);  /* あいぼう Aibo */
+      --text-left: 15%;            /* 文字距離左邊（設計稿 305 / 2000） */
+
+      /* ══════════ 版面設定（統一尺寸：電腦 600px｜平板 740px｜手機另設 4:5） ══════════ */
+      --height-pc: 600px;          /* 電腦版高度 */
+      --height-tab: 740px;         /* 平板版高度 */
+      --ratio-m: 4 / 5;            /* 手機版比例 */
+      --img-focus-tab: 72% center; /* 平板版圖片對齊位置（讓蠟燭留在畫面內） */
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      background: var(--bg);
+      overflow-x: hidden;
+      font-family: var(--font);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ===== 外框：手機版 4:5 ===== */
+    .banner {
+      position: relative;
+      width: 100%;
+      aspect-ratio: var(--ratio-m);
+      background: var(--bg);
+    }
+
+    /* 大底圖 */
+    .bg,
+    .bg img {
+      position: absolute;
+      inset: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    .bg img {
+      object-fit: cover;
+      object-position: center;
+      color: transparent;
+      background: var(--bg);
+    }
+
+    /* ===== 文字：手機版在底圖偏上方、置中 ===== */
+    .copy {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1;
+      padding: 13% 7% 0;
+      color: var(--text);
+      text-align: center;
+    }
+    .title {
+      font-weight: 300;
+      font-size: max(19px, 5.4vw);
+      line-height: 1.4;
+      letter-spacing: 0.16em;
+      text-indent: 0.16em;           /* 抵銷最後一字的字距，讓置中更準 */
+    }
+    .desc {                  /* 同網站 p */
+      margin-top: 14px;
+      font-size: 13.5px;
+      font-weight: 400;
+      line-height: 2.2;
+      letter-spacing: 0.06em;
+      text-indent: 0.06em;
+    }
+
+    /* ===== 平板（768px 以上）：大底圖＋左字，高度 740px ===== */
+    @media (min-width: 768px) {
+      .banner {
+        aspect-ratio: auto;
+        height: var(--height-tab);
+      }
+      .bg img {
+        object-position: var(--img-focus-tab);
+      }
+      .copy {
+        top: 0;
+        bottom: 0;
+        right: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0 0 4% var(--text-left);
+        text-align: left;
+      }
+      .title {
+        font-size: var(--title-size);
+        text-indent: 0;
+      }
+      .desc {
+        margin-top: 18px;
+        text-indent: 0;
+      }
+    }
+
+    /* ===== 電腦（1024px 以上）：大底圖＋左字，高度 600px ===== */
+    @media (min-width: 1024px) {
+      .banner {
+        height: var(--height-pc);
+      }
+      .bg img {
+        object-position: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="banner">
+
+    <!-- 大底圖 → 換成「沒有文字」的圖片網址 -->
+    <picture class="bg">
+      <!-- 手機版圖片（建議 1080×1350，4:5 直式，蠟燭放在畫面中下方） -->
+      <source media="(max-width: 767px)" srcset="https://ik.imagekit.io/itssaturday/banner/20261006-banner-cat-a-m.jpg">
+      <!-- 電腦／平板圖片（建議 2400×1000，蠟燭放在畫面右半邊） -->
+      <img src="https://ik.imagekit.io/itssaturday/banner/20261006-banner-cat-a.jpg" alt="Aibo 寵物陪伴系列香氛蠟燭">
+    </picture>
+
+    <div class="copy">
+      <h2 class="title">あいぼう Aibo</h2>
+      <p class="desc">有你在，日子變得溫柔。<br>像耳朵一樣靜靜傾聽，<br>也像香氣一樣默默陪伴。</p>
+    </div>
+
+  </div>
+
+  <script>
+    /* 把內容的實際高度回報給 BVShop 頁面，讓框框高度自動剛好 */
+    (function () {
+      var last = 0;
+      function report() {
+        var h = document.querySelector(".banner").offsetHeight;
+        if (h && h !== last) {
+          last = h;
+          window.parent.postMessage({ ispBannerHeight: h, ispBannerId: "isp-aibo2-banner" }, "*");
+        }
+      }
+      window.addEventListener("load", report);
+      window.addEventListener("resize", report);
+      Array.prototype.forEach.call(document.images, function (img) {
+        img.addEventListener("load", report);
+      });
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(report);
+      report();
+      setTimeout(report, 500);
+      setTimeout(report, 1500);
+    })();
+  </script>
+</body>
+</html>
